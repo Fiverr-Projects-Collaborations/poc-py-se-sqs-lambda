@@ -1,0 +1,46 @@
+Py-se-Lambda-sqs
+Py-se-lambda
+https://robertorocha.info/setting-up-a-selenium-web-scraper-on-aws-lambda-with-python/
+sqs-lambda - https://docs.aws.amazon.com/lambda/latest/dg/with-sqs-example.html
+https://docs.aws.amazon.com/lambda/latest/dg/with-sqs-create-package.html
+
+https://hackernoon.com/running-selenium-and-headless-chrome-on-aws-lambda-layers-python-3-6-bd810503c6c3
+
+https://github.com/ManivannanMurugavel/selenium-python-aws-lambda
+https://medium.com/@manivannan_data/python-selenium-on-aws-lambda-b4b9de44b8e1
+
+
+
+
+##### AWS SQS #####
+1. Create queue and give access for write permission, timeout to 15 min to match max lambda timeout.
+###################
+
+
+##### AWS S3 #####
+1. Bucket with private access to store zip file that will be accessed by Lambda function
+##################
+
+
+##### AWS IAM #####
+1. Access and secret key:
+  Activate MFA on your root account -> Access keys (access key ID and secret access key)
+NOTE: This will be used to send messages to SQS Queue
+
+2. Role with these policies:
+  AWSLambdaSQSQueueExecutionRole
+  AWSLambdaBasicExecutionRole-e9758d5f-522c-42d9-873a-15a66940585a
+NOTE: This role will be attached to Lambda Function to read queue and execute script.
+##################
+
+
+##### AWS LAMBDA #####
+1. zip from S3 - lambda_function.zip
+2. runtime - python 3.6
+3. handler - lambda_function.lambda_handler
+4. Environment Variables:
+    PATH:/var/task/bin
+    PYTHONPATH:/var/task/lib
+5. trigger - sqs - select arn of queue.
+6. Basic settings - timeout 15 min
+######################
