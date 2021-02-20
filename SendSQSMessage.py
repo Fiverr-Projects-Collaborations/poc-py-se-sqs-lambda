@@ -2,8 +2,8 @@ import boto3
 
 # Create SQS client
 sqs = boto3.client('sqs', region_name='us-east-1',
-                   aws_access_key_id="AKIAJO5SBNHGAA2VDAWQ",
-                   aws_secret_access_key="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")
+                   aws_access_key_id="yy",
+                   aws_secret_access_key="xx")
 # Queue URL
 queue_url = 'https://sqs.us-east-1.amazonaws.com/175990529520/company_queue'
 
